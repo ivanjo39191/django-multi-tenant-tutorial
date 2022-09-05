@@ -21,6 +21,7 @@ services:
     build: .
     container_name: example_container_web
     restart: always
+    user: $DOCKER_USER
     ports:
         - "${WEB_PORT}:8000"
     volumes:
