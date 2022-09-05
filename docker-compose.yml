@@ -19,7 +19,7 @@ services:
   web:
     image: example_tenant:latest
     build: .
-    container_name: example_container_web
+    container_name: ${IMAGE_NAME}_web
     restart: always
     user: $DOCKER_USER
     ports:
