@@ -2,5 +2,4 @@ data
 .git
 db.sqlite3
 
-# .env 正式環境不上傳
-.env 
+# .env (正式環境不上傳)
