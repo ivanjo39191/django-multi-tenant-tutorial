@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    container_name: ${IMAGE_NAME}_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    healthcheck:
+        test: [ "CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
+        timeout: 20s
+        interval: 10s
+        retries: 10
+    volumes:
+      - ./data/postgresql/data:/var/lib/postgresql/data
+  web:
+    image: example_tenant:latest
+    build: .
+    container_name: example_container_web
+    restart: always
+    ports:
+        - "${WEB_PORT}:8000"
+    volumes:
+      - .:/opt/app
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db

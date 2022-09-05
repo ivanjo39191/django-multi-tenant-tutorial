@@ -1,0 +1,8 @@
+django-tenants==3.4.3
+django==3.2.5
+django-tenants-q==1.0.0
+django-elasticsearch-dsl==7.1.1
+django_q==1.3.9
+django_redis==5.2.0
+psycopg2==2.9.3
+uwsgi==2.0.20
