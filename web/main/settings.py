@@ -66,6 +66,7 @@ TENANT_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.sitemaps',
+    'products',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
