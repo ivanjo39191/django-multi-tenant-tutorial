@@ -12,7 +12,8 @@ class Product(models.Model):
     created = models.DateTimeField('建立日期', auto_now_add=True)
     modified = models.DateTimeField('修改日期', auto_now=True)
     category = models.ForeignKey(
-        'products.ProductCategory', blank=True, null=True, on_delete=models.RESTRICT, related_name='product_set'
+        'products.ProductCategory', blank=True, null=True, 
+        on_delete=models.RESTRICT, verbose_name='商品分類', related_name='product_set'
     )
 
     class Meta:
