@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Page</title>
+</head>
+<body>
+
+<h1>Detail</h1>
+<span><a href="{% url 'products:home' %}">首頁</a><span>|
+<span><a href="{% url 'products:list' %}">商品列表頁面</a><span>
+
+<p>商品編號：{{ item.id }}</p>
+<p>商品分類：{{ item.category.name }}</p>
+<p>商品名稱：{{ item.name }}</p>
+<p>商品價格：{{ item.price }}</p>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>List Page</title>
+</head>
+<body>
+
+<h1>Product List</h1>
+<span><a href="{% url 'products:home' %}">首頁</a><span>|
+<span><a href="{% url 'products:list' %}">商品列表頁面</a><span>
+{% for item in items %}
+    <hr>
+    <a href="{% url 'products:detail' item.id %}">商品編號：{{ item.id }}</a>
+    <p>商品分類：{{ item.category.name }}</p>
+    <p>商品名稱：{{ item.name }}</p>
+    <p>商品價格：{{ item.price }}</p>
+{% endfor %}
+
+</body>
+</html>
