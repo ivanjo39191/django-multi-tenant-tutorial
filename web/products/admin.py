@@ -1,7 +1,12 @@
 from django.contrib import admin
-from products.models import Product, ProductCategory
+from products.models import Product, ProductCategory, ProductImage
 
-# Register your models here.
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    fields = ('name', 'image', 'order')
+
+
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name', 'category__name']
     fields = ('name', 'description', 'price', 'category', 'created', 'modified')
@@ -9,11 +14,12 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     autocomplete_fields = ['category']
     readonly_fields = ('created', 'modified')
+    inlines = [ProductImageInline, ]
 
 
 class ProductCategoryAdmin(admin.ModelAdmin):
     search_fields = ['name']
-    fields = ('name', 'description', 'created', 'modified')
+    fields = ('name', 'description', 'created', 'modified', 'image')
     list_display = ('name',)
     readonly_fields = ('created', 'modified')
 
