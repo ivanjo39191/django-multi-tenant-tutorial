@@ -46,7 +46,7 @@ class ProductCategory(models.Model):
 
 class ProductImage(models.Model):
     name = models.CharField('商品圖片說明', max_length=50)
-    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='product_set')
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, related_name='product_image_set')
     image = models.ImageField("圖片", null=True, blank=True, upload_to=core_helpers.upload_handle)
     order = models.PositiveIntegerField(null=True, blank=True)
 
