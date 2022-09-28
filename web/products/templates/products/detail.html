@@ -1,18 +1,89 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Home Page</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-<h1>Detail</h1>
-<span><a href="{% url 'products:home' %}">首頁</a><span>|
-<span><a href="{% url 'products:list' %}">商品列表頁面</a><span>
+{% block content %}
 
-<p>商品編號：{{ item.id }}</p>
-<p>商品分類：{{ item.category.name }}</p>
-<p>商品名稱：{{ item.name }}</p>
-<p>商品價格：{{ item.price }}</p>
+<section class="single-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'products:home' %}">首頁</a></li>
+                    <li><a href="{% url 'products:list' %}">商品列表</a></li>
+                    <li class="active">商品詳細資料</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row mt-20">
+            <div class="col-md-5">
+                <div class="single-product-slider">
+                    <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+                        <div class='carousel-outer'>
+                            <!-- me art lab slider -->
+                            <div class='carousel-inner '>
+                                {% for product_image in item.product_image_set.all %}
+                                    {% if forloop.counter == 1 %}
+                                        <div class='item active'>
+                                    {% else %}
+                                        <div class='item'>
+                                    {% endif  %}
+                                        {% if product_image.image %}
+                                            <img src='{{ product_image.image.url }}' alt='' data-zoom-image="{{ product_image.image.url }}" />
+                                        {% endif  %}
+                                    </div>
+                                {% endfor  %}
+                            </div>
+                            <!-- sag sol -->
+                            <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+                                <i class="tf-ion-ios-arrow-left"></i>
+                            </a>
+                            <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+                                <i class="tf-ion-ios-arrow-right"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- thumb -->
+                        <ol class='carousel-indicators mCustomScrollbar meartlab'>
+                            {% for product_image in item.product_image_set.all %}
+                                {% if forloop.counter == 1 %}
+                                    <li data-target='#carousel-custom' data-slide-to='0' class='active'>
+                                {% else %}
+                                    <li data-target='#carousel-custom' data-slide-to='{{ forloop.counter|add:-1 }}'>
+                                {% endif  %}
+                                {% if product_image.image %}
+                                    <img src='{{ product_image.image.url }}' alt='' />
+                                {% endif  %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="single-product-details">
+                    <h2>{{ item.name }}</h2>
+                    <p class="product-price">${{ item.price }}</p>
+                    
+                    <p class="product-description mt-20">
+                        {{ item.description }}
+                    </p>
+                    <div class="product-quantity">
+                        <span>數量:</span>
+                        <div class="product-quantity-slider">
+                            <input id="product-quantity" type="text" value="0" name="product-quantity">
+                        </div>
+                    </div>
+                    <div class="product-category">
+                        <span>商品分類:</span>
+                        <ul>
+                            <li><a href="product-single.html">{{ item.category.name }}</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-main mt-20">加入購物車</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-</body>
-</html>
+{% endblock content %}

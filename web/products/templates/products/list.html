@@ -1,20 +1,90 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>List Page</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-<h1>Product List</h1>
-<span><a href="{% url 'products:home' %}">首頁</a><span>|
-<span><a href="{% url 'products:list' %}">商品列表頁面</a><span>
-{% for item in items %}
-    <hr>
-    <a href="{% url 'products:detail' item.id %}">商品編號：{{ item.id }}</a>
-    <p>商品分類：{{ item.category.name }}</p>
-    <p>商品名稱：{{ item.name }}</p>
-    <p>商品價格：{{ item.price }}</p>
-{% endfor %}
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <h1 class="page-name">全部商品</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'products:home' %}">首頁</a></li>
+                        <li class="active"><a href="{% url 'products:list' %}">商品列表</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-</body>
-</html>
+<section class="products section">
+    <div class="container">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-4">
+                <div class="product-item">
+                    <div class="product-thumb">
+                        {% if item.product_image_set.all.0.image %}
+                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                        {% endif %}
+                        <div class="preview-meta">
+                            <ul>
+                                <li>
+                                    <span  data-toggle="modal" data-target="#product-modal-{{ item.id }}">
+                                        <i class="tf-ion-ios-search-strong"></i>
+                                    </span>
+                                </li>
+                                <li>
+                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h4><a href="product-single.html">{{ item.name }}</a></h4>
+                        <p class="price">${{ item.price }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal product-modal fade" id="product-modal-{{ item.id }}">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tf-ion-close"></i>
+                </button>
+                <div class="modal-dialog " role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <div class="modal-image">
+                                        {% if item.product_image_set.all.0.image %}
+                                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="product-short-details">
+                                        <h2 class="product-title">{{ item.name }}</h2>
+                                        <p class="product-price">${{ item.price }}</p>
+                                        <p class="product-short-description">
+                                            {{ item.description }}
+                                        </p>
+                                        <a href="cart.html" class="btn btn-main">加入購物車</a>
+                                        <a href="{% url 'products:detail' item.id %}" class="btn btn-transparent">檢視商品詳細資料</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

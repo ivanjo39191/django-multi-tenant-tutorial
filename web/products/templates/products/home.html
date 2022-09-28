@@ -11,32 +11,29 @@
                 </div>
             </div>
             <div class="col-md-6">
+                {% for left_product_category in left_product_categories %}
                 <div class="category-box">
                     <a href="#!">
-                        <img src="{% static 'products/images/shop/category/category-1.jpg' %}" alt="" />
+                        {% if left_product_category.image %}
+                        <img src="{{ left_product_category.image.url }}" alt="" />
+                        {% endif %}
                         <div class="content">
-                            <h3>服飾</h3>
-                            <p>讓您煥然一新</p>
+                            <h3 style="color: white;">{{ left_product_category.name }}</h3>
+                            <p style="color: white;">{{ left_product_category.description }}</p>
                         </div>
                     </a>	
                 </div>
-                <div class="category-box">
-                    <a href="#!">
-                        <img src="{% static 'products/images/shop/category/category-2.jpg' %}" alt="" />
-                        <div class="content">
-                            <h3>3C</h3>
-                            <p>走在科技尖端</p>
-                        </div>
-                    </a>	
-                </div>
+                {% endfor %}
             </div>
             <div class="col-md-6">
                 <div class="category-box category-box-2">
                     <a href="#!">
-                        <img src="{% static 'products/images/shop/category/category-3.jpg' %}" alt="" />
+                        {% if right_product_category.image %}
+                        <img src="{{ right_product_category.image.url }}" alt="" />
+                        {% endif %}
                         <div class="content">
-                            <h3>防毒軟體</h3>
-                            <p>防毒軟體使用於偵測、移除電腦病毒、電腦蠕蟲、和特洛伊木馬程式。</p>
+                            <h3 style="color: white;">{{ right_product_category.name }}</h3>
+                            <p style="color: white;">{{ right_product_category.description }}</p>
                         </div>
                     </a>	
                 </div>
@@ -49,46 +46,21 @@
     <div class="container">
         <div class="row">
             <div class="title text-center">
-                <h2>Trendy Products</h2>
+                <h2>所有商品</h2>
             </div>
         </div>
         <div class="row">
-            
+            {% for item in items %}
             <div class="col-md-4">
                 <div class="product-item">
                     <div class="product-thumb">
-                        <span class="bage">Sale</span>
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-1.jpg' %}" alt="product-img" />
+                        {% if item.product_image_set.all.0.image %}
+                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                        {% endif %}
                         <div class="preview-meta">
                             <ul>
                                 <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#!" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Reef Boardsport</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-2.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
+                                    <span  data-toggle="modal" data-target="#product-modal-{{ item.id }}">
                                         <i class="tf-ion-ios-search-strong"></i>
                                     </span>
                                 </li>
@@ -102,226 +74,44 @@
                         </div>
                     </div>
                     <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
+                        <h4><a href="product-single.html">{{ item.name }}</a></h4>
+                        <p class="price">${{ item.price }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-3.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Strayhorn SP</a></h4>
-                        <p class="price">$230</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-4.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Bradley Mid</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-5.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-6.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <span class="bage">Sale</span>
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-7.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-8.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="{% static 'products/images/shop/products/product-9.jpg' %}" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-        
-        <!-- Modal -->
-        <div class="modal product-modal fade" id="product-modal">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <i class="tf-ion-close"></i>
-            </button>
-            <div class="modal-dialog " role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-8 col-sm-6 col-xs-12">
-                                <div class="modal-image">
-                                    <img class="img-responsive" src="{% static 'products/images/shop/products/modal-product.jpg' %}" alt="product-img" />
+            <!-- Modal -->
+            <div class="modal product-modal fade" id="product-modal-{{ item.id }}">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tf-ion-close"></i>
+                </button>
+                <div class="modal-dialog " role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <div class="modal-image">
+                                        {% if item.product_image_set.all.0.image %}
+                                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="product-short-details">
-                                    <h2 class="product-title">GM Pendant, Basalt Grey</h2>
-                                    <p class="product-price">$200</p>
-                                    <p class="product-short-description">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil cum. Illo laborum numquam rem aut officia dicta cumque.
-                                    </p>
-                                    <a href="cart.html" class="btn btn-main">Add To Cart</a>
-                                    <a href="product-single.html" class="btn btn-transparent">View Product Details</a>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="product-short-details">
+                                        <h2 class="product-title">{{ item.name }}</h2>
+                                        <p class="product-price">${{ item.price }}</p>
+                                        <p class="product-short-description">
+                                            {{ item.description }}
+                                        </p>
+                                        <a href="cart.html" class="btn btn-main">加入購物車</a>
+                                        <a href="{% url 'products:detail' item.id %}" class="btn btn-transparent">檢視商品詳細資料</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- /.modal -->
-
+            </div><!-- /.modal -->
+            {% endfor %}
         </div>
     </div>
 </section>
