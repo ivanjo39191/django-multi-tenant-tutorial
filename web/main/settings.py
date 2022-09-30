@@ -66,6 +66,7 @@ TENANT_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.sitemaps',
+    'core',
     'products',
 )
 

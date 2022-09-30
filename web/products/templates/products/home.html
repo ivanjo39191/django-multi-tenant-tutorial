@@ -11,31 +11,40 @@
                 </div>
             </div>
             <div class="col-md-6">
-                {% for left_product_category in left_product_categories %}
                 <div class="category-box">
                     <a href="#!">
-                        {% if left_product_category.image %}
-                        <img src="{{ left_product_category.image.url }}" alt="" />
+                        {% if get_setting.home_type1.image %}
+                            <img src="{% get_media_prefix %}{{ get_setting.home_type1.image }}" alt="" />
                         {% endif %}
                         <div class="content">
-                            <h3 style="color: white;">{{ left_product_category.name }}</h3>
-                            <p style="color: white;">{{ left_product_category.description }}</p>
+                            <h3 style="color: white;">{{ get_setting.home_type1.name }}</h3>
+                            <p style="color: white;">{{ get_setting.home_type1.description }}</p>
                         </div>
                     </a>	
                 </div>
-                {% endfor %}
+                <div class="category-box">
+                    <a href="#!">
+                        {% if get_setting.home_type2.image %}
+                            <img src="{% get_media_prefix %}{{ get_setting.home_type2.image }}" alt="" />
+                        {% endif %}
+                        <div class="content">
+                            <h3 style="color: white;">{{ get_setting.home_type2.name }}</h3>
+                            <p style="color: white;">{{ get_setting.home_type2.description }}</p>
+                        </div>
+                    </a>	
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="category-box category-box-2">
                     <a href="#!">
-                        {% if right_product_category.image %}
-                        <img src="{{ right_product_category.image.url }}" alt="" />
+                        {% if get_setting.home_type3.image %}
+                            <img src="{% get_media_prefix %}{{ get_setting.home_type3.image }}" alt="" />
                         {% endif %}
                         <div class="content">
-                            <h3 style="color: white;">{{ right_product_category.name }}</h3>
-                            <p style="color: white;">{{ right_product_category.description }}</p>
+                            <h3 style="color: white;">{{ get_setting.home_type3.name }}</h3>
+                            <p style="color: white;">{{ get_setting.home_type3.description }}</p>
                         </div>
-                    </a>	
+                    </a>
                 </div>
             </div>
         </div>
@@ -51,66 +60,66 @@
         </div>
         <div class="row">
             {% for item in items %}
-            <div class="col-md-4">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        {% if item.product_image_set.all.0.image %}
-                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
-                        {% endif %}
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-                                    <span  data-toggle="modal" data-target="#product-modal-{{ item.id }}">
-                                        <i class="tf-ion-ios-search-strong"></i>
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#!"><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="product-thumb">
+                            {% if item.product_image_set.all.0.image %}
+                                <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                            {% endif %}
+                            <div class="preview-meta">
+                                <ul>
+                                    <li>
+                                        <span  data-toggle="modal" data-target="#product-modal-{{ item.id }}">
+                                            <i class="tf-ion-ios-search-strong"></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <a href="#" ><i class="tf-ion-ios-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#!"><i class="tf-ion-android-cart"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h4><a href="product-single.html">{{ item.name }}</a></h4>
+                            <p class="price">${{ item.price }}</p>
                         </div>
                     </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">{{ item.name }}</a></h4>
-                        <p class="price">${{ item.price }}</p>
-                    </div>
                 </div>
-            </div>
-            <!-- Modal -->
-            <div class="modal product-modal fade" id="product-modal-{{ item.id }}">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="tf-ion-close"></i>
-                </button>
-                <div class="modal-dialog " role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-8 col-sm-6 col-xs-12">
-                                    <div class="modal-image">
-                                        {% if item.product_image_set.all.0.image %}
-                                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
-                                        {% endif %}
+                <!-- Modal -->
+                <div class="modal product-modal fade" id="product-modal-{{ item.id }}">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="tf-ion-close"></i>
+                    </button>
+                    <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-6 col-xs-12">
+                                        <div class="modal-image">
+                                            {% if item.product_image_set.all.0.image %}
+                                                <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                                            {% endif %}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="product-short-details">
-                                        <h2 class="product-title">{{ item.name }}</h2>
-                                        <p class="product-price">${{ item.price }}</p>
-                                        <p class="product-short-description">
-                                            {{ item.description }}
-                                        </p>
-                                        <a href="cart.html" class="btn btn-main">加入購物車</a>
-                                        <a href="{% url 'products:detail' item.id %}" class="btn btn-transparent">檢視商品詳細資料</a>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="product-short-details">
+                                            <h2 class="product-title">{{ item.name }}</h2>
+                                            <p class="product-price">${{ item.price }}</p>
+                                            <p class="product-short-description">
+                                                {{ item.description }}
+                                            </p>
+                                            <a href="cart.html" class="btn btn-main">加入購物車</a>
+                                            <a href="{% url 'products:detail' item.id %}" class="btn btn-transparent">檢視商品詳細資料</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!-- /.modal -->
+                </div><!-- /.modal -->
             {% endfor %}
         </div>
     </div>

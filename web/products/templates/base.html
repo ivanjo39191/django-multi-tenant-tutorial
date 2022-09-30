@@ -1,4 +1,6 @@
 {% load static %}
+{% load core_tag %}
+{% get_setting as get_setting %}
 <!DOCTYPE html>
 
 <html lang="zh-hant">
@@ -45,7 +47,8 @@
             <div class="col-md-4 col-xs-12 col-sm-4">
                 <div class="contact-number">
                     <i class="tf-ion-ios-telephone"></i>
-                    <span>0129- 12323-123123</span>
+                    <span>{{ get_setting.phone }}</span>
+                    
                 </div>
             </div>
             <div class="col-md-4 col-xs-12 col-sm-4">
@@ -58,8 +61,8 @@
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-size="40"
                                 font-family="AustinBold, Austin" font-weight="bold">
                                 <g id="Group" transform="translate(-108.000000, -297.000000)" fill="#000000">
-                                    <text id="IVANKAO">
-                                        <tspan x="108.94" y="325">IvanKao</tspan>
+                                    <text id="sitename">
+                                        <tspan x="108.94" y="325">{{ get_setting.sitename }}</tspan>
                                     </text>
                                 </g>
                             </g>
@@ -74,41 +77,6 @@
                         <a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                 class="tf-ion-android-cart"></i>Cart</a>
                         <div class="dropdown-menu cart-dropdown">
-                            <!-- Cart Item -->
-                            <div class="media">
-                                <a class="pull-left" href="#!">
-                                    <img class="media-object" src="{% static 'products/images/shop/cart/cart-1.jpg' %}" alt="image" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                    <div class="cart-price">
-                                        <span>1 x</span>
-                                        <span>1250.00</span>
-                                    </div>
-                                    <h5><strong>$1200</strong></h5>
-                                </div>
-                                <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                            </div><!-- / Cart Item -->
-                            <!-- Cart Item -->
-                            <div class="media">
-                                <a class="pull-left" href="#!">
-                                    <img class="media-object" src="{% static 'products/images/shop/cart/cart-2.jpg' %}" alt="image" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
-                                    <div class="cart-price">
-                                        <span>1 x</span>
-                                        <span>1250.00</span>
-                                    </div>
-                                    <h5><strong>$1200</strong></h5>
-                                </div>
-                                <a href="#!" class="remove"><i class="tf-ion-close"></i></a>
-                            </div><!-- / Cart Item -->
-
-                            <div class="cart-summary">
-                                <span>Total</span>
-                                <span class="total-price">$1799.00</span>
-                            </div>
                             <ul class="text-center cart-buttons">
                                 <li><a href="cart.html" class="btn btn-small">View Cart</a></li>
                                 <li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
@@ -131,10 +99,8 @@
                     <!-- Languages -->
                     <li class="commonSelect">
                         <select class="form-control">
-                            <option>EN</option>
-                            <option>DE</option>
-                            <option>FR</option>
-                            <option>ES</option>
+                            <option>中文</option>
+                            <option>English</option>
                         </select>
                     </li><!-- / Languages -->
 
@@ -153,23 +119,18 @@
             <div class="col-md-12">
                 <ul class="social-media">
                     <li>
-                        <a href="https://www.facebook.com/themefisher">
+                        <a href="{{ get_setting.facebook }}" target="_blank">
                             <i class="tf-ion-social-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com/themefisher">
+                        <a href="{{ get_setting.instagram }}" target="_blank">
                             <i class="tf-ion-social-instagram"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.twitter.com/themefisher">
+                        <a href="{{ get_setting.twitter }}" target="_blank">
                             <i class="tf-ion-social-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.pinterest.com/themefisher/">
-                            <i class="tf-ion-social-pinterest"></i>
                         </a>
                     </li>
                 </ul>
@@ -187,7 +148,7 @@
                         <a href="contact.html">PRIVACY POLICY</a>
                     </li>
                 </ul>
-                <p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
+                <p class="copyright-text">Copyright &copy;2022, Designed &amp; Developed by <a href="https://ivankao.ichweblog.com/">IvanKao</a></p>
             </div>
         </div>
     </div>
