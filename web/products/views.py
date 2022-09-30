@@ -1,5 +1,6 @@
 from django.db import connection
 from django.views.generic import TemplateView, ListView, DetailView
+from core.models import Setting
 from products.models import Product, ProductCategory
 
 class HomeView(TemplateView):
@@ -26,6 +27,21 @@ class ProductListView(ListView):
 
 
 class ProductDetailView(DetailView):
+    
     model = Product
-    template_name = 'products/detail.html'
     context_object_name = 'item'
+    
+    def get_template_names(self):
+        """
+        Return a list of template names to be used for the request. Must return
+        a list. May not be called if render_to_response() is overridden.
+        """
+        setting = Setting.objects.get(id='zh-hant')
+        template_name = 'products/detail/template1.html'
+        
+        if setting.detail_template == "Template-1":
+            template_name = "products/detail/template1.html"
+        elif setting.detail_template == "Template-2":
+            template_name = "products/detail/template2.html"
+        return [template_name]
+    

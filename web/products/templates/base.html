@@ -20,7 +20,7 @@
 <meta name="generator" content="Themefisher Constra HTML Template v1.0">
 
 <!-- Favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="{% static 'products/images/favicon.png' %}">
+<link rel="shortcut icon" type="image/x-icon" href="{% get_media_prefix %}{{ get_setting.favicon }}">
 
 <!-- Themefisher Icon font -->
 <link rel="stylesheet" href="{% static 'products/plugins/themefisher-font/style.css' %}">
@@ -34,7 +34,11 @@
 <link rel="stylesheet" href="{% static 'products/plugins/slick/slick-theme.css' %}">
 
 <!-- Main Stylesheet -->
-<link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+{% if get_setting.style %}
+    <link rel="stylesheet" href="{% get_media_prefix %}{{ get_setting.style }}">
+{% else %}
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+{% endif %}
 
 </head>
 
@@ -45,10 +49,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-xs-12 col-sm-4">
+                <img style="height: 12em;width: 12em" src="{% get_media_prefix %}{{ get_setting.logo }}">
                 <div class="contact-number">
                     <i class="tf-ion-ios-telephone"></i>
                     <span>{{ get_setting.phone }}</span>
-                    
                 </div>
             </div>
             <div class="col-md-4 col-xs-12 col-sm-4">
