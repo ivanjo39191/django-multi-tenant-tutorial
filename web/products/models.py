@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from core import helpers as core_helpers
 
 # Create your models here.
@@ -6,19 +7,19 @@ class Product(models.Model):
     '''
     商品模型
     '''
-    name = models.CharField('商品名稱', max_length=50)
-    description = models.TextField('商品描述', max_length=500, null=True, blank=True)
-    price = models.PositiveIntegerField('商品價格', default=0)
-    created = models.DateTimeField('建立日期', auto_now_add=True)
-    modified = models.DateTimeField('修改日期', auto_now=True)
+    name = models.CharField(_('Product Name'), max_length=50)
+    description = models.TextField(_('Product Description'), max_length=500, null=True, blank=True)
+    price = models.PositiveIntegerField(_('Product Price'), default=0)
+    created = models.DateTimeField(_('Created Date'), auto_now_add=True)
+    modified = models.DateTimeField(_('Modified Date'), auto_now=True)
     category = models.ForeignKey(
         'products.ProductCategory', blank=True, null=True, 
-        on_delete=models.RESTRICT, verbose_name='商品分類', related_name='product_set'
+        on_delete=models.RESTRICT, verbose_name=_('Product Category'), related_name='product_set'
     )
 
     class Meta:
-        verbose_name = '商品'
-        verbose_name_plural = '商品'
+        verbose_name = _('Product')
+        verbose_name_plural = _('Product')
         ordering = ['-created']
 
     def __str__(self):
