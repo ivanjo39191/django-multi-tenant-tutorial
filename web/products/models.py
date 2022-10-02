@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
 from core import helpers as core_helpers
 
 # Create your models here.
@@ -31,10 +32,30 @@ class ProductCategory(models.Model):
     商品分類模型
     '''
     name = models.CharField('商品分類名稱', max_length=50)
+    name_en = models.CharField('商品分類名稱(英)', max_length=50, null=True, blank=True)
     description = models.TextField('商品分類描述', max_length=500, null=True, blank=True)
+    description_en = models.TextField('商品分類描述(英)', max_length=500, null=True, blank=True)
     created = models.DateTimeField('建立日期', auto_now_add=True)
     modified = models.DateTimeField('修改日期', auto_now=True)
     image = models.ImageField("圖片", null=True, blank=True, upload_to=core_helpers.upload_handle)
+    
+    @property
+    def name_locale(self):
+        language = get_language()
+        if language == 'zh-hant':
+            return f"{self.name}"
+        elif language == 'en':
+            return f"{self.name_en}"
+        return f"{self.name}"
+    
+    @property
+    def description_locale(self):
+        language = get_language()
+        if language == 'zh-hant':
+            return f"{self.description}"
+        elif language == 'en':
+            return f"{self.description_en}"
+        return f"{self.description}"
 
     class Meta:
         verbose_name = '商品分類'

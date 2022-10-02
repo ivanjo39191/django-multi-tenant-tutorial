@@ -18,8 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProductCategoryAdmin(admin.ModelAdmin):
-    search_fields = ['name']
-    fields = ('name', 'description', 'created', 'modified', 'image')
+    search_fields = ['name', 'name_en']
+    fields = ('name', 'name_en', 'description', 'description_en', 'created', 'modified', 'image')
     list_display = ('name',)
     readonly_fields = ('created', 'modified')
 
