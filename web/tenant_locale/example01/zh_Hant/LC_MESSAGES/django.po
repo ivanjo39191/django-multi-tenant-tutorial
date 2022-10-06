@@ -1,0 +1,53 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-01 15:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Created Date"
+msgstr "建立日期"
+
+msgid "Home page"
+msgstr "首頁"
+
+msgid "List of products"
+msgstr "商品列表"
+
+msgid "Modified Date"
+msgstr "修改日期"
+
+msgid "Product"
+msgstr "商品"
+
+msgid "Product Category"
+msgstr "商品分類"
+
+msgid "Product Description"
+msgstr "商品描述"
+
+msgid "Product detail"
+msgstr "商品詳情"
+
+msgid "Product Name"
+msgstr "商品名稱"
+
+msgid "Product Price"
+msgstr "商品價格"
+
+msgid "Subscribe to the newsletter"
+msgstr "訂閱電子報"
+
+msgid "subscription"
+msgstr "訂閱"
+
+msgid "Thank you for subscribing to the newsletter."
+msgstr "感謝您訂閱電子報"
+

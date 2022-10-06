@@ -56,12 +56,13 @@
                 <div class="contact-number">
                     <i class="tf-ion-ios-telephone"></i>
                     <span>{{ get_setting.phone }}</span>
+                    <span><a href="{% url 'epaper:epaper' %}">{% translate 'Subscribe to the newsletter' %}</a></span>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12 col-sm-4">
                 <!-- Site Name -->
                 <div class="name text-center">
-                    <a href="index.html">
+                    <a href="{% url 'products:home' %}">
                         <!-- replace name here -->
                         <h1>{{ get_setting.sitename }}</h1>
                     </a>

@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 SHARED_APPS = (
@@ -44,30 +43,11 @@ TENANT_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.sitemaps',
-)
-
-INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
-
-# settings.py
-
-# Application definition
-
-SHARED_APPS = (
-    'django_tenants',  # mandatory
-    'customers', # you must list the app where your tenant model resides in
-    'django.contrib.contenttypes',
-)
-
-TENANT_APPS = (
-    'django.contrib.auth',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.sitemaps',
+    'django_q',
+    'django_tenants_q',
     'core',
     'products',
+    'epaper',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -183,3 +163,27 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mailserver'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+
+
+Q_CLUSTER = {
+    'name': 'example_tenant',
+    'workers': 8,
+    'recycle': 500,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'Django Q',
+    'redis': {
+        'host': 'redis',
+        'port': 6379,
+        'db': 0, }
+}

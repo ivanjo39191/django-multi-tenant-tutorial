@@ -1,0 +1,21 @@
+<div>
+  <h3>{{ sitename }} 新品快訊</h3>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">商品清單</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>
+          <a href="{{ host }}{% url 'products:detail' product.id %}" target="_blank">
+            {{ product.name }}
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

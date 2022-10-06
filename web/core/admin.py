@@ -69,6 +69,15 @@ class SettingAdmin(admin.ModelAdmin):
                 'twitter',
             )
         }),
+        ('郵件設定', {
+            'classes': (
+                'tab',
+                'tab-mail',
+            ),
+            'fields': (
+                'from_email',
+            )
+        }),
     ]
 
 

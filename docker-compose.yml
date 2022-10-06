@@ -31,3 +31,27 @@ services:
         condition: service_healthy
     links:
       - db
+  redis:
+    image: redis:latest
+    container_name: ${IMAGE_NAME}_redis
+    restart: always
+  qcluster: 
+    image: example_tenant:latest
+    container_name: ${IMAGE_NAME}_qcluster
+    restart: always
+    entrypoint: /opt/app/django_q/docker-entrypoint.sh
+    volumes:
+      - .:/opt/app
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+  mailserver:
+    image: boky/postfix
+    container_name: ${IMAGE_NAME}_mailserver
+    restart: always
+    environment:
+        ALLOW_EMPTY_SENDER_DOMAINS: 'true'
+        POSTFIX_myhostname: 'postfix'
