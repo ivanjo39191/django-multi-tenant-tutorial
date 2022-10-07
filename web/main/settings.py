@@ -45,6 +45,7 @@ TENANT_APPS = (
     'django.contrib.sitemaps',
     'django_q',
     'django_tenants_q',
+    'django_elasticsearch_dsl',  # Elasticsearch integration
     'core',
     'products',
     'epaper',
@@ -186,4 +187,10 @@ Q_CLUSTER = {
         'host': 'redis',
         'port': 6379,
         'db': 0, }
+}
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'es01:9200'
+    },
 }

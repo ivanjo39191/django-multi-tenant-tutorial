@@ -55,3 +55,21 @@ services:
     environment:
         ALLOW_EMPTY_SENDER_DOMAINS: 'true'
         POSTFIX_myhostname: 'postfix'
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: ${IMAGE_NAME}_es01
+    restart: always
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/elasticsearch_data:/usr/share/elasticsearch/data # chmod 777
+    ports:
+        - "9200:9200"
