@@ -2,6 +2,7 @@ from __future__ import unicode_literals, absolute_import
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.db import connection
 from six.moves import input
 from ...registries import registry
 
@@ -10,6 +11,13 @@ class Command(BaseCommand):
     help = 'Manage elasticsearch index.'
 
     def add_arguments(self, parser):
+        parser.add_argument(
+            '--schema',
+            metavar='schema_name',
+            type=str,
+            nargs='*',
+            help="schema name"
+        )
         parser.add_argument(
             '--models',
             metavar='app[.model]',
@@ -114,6 +122,12 @@ class Command(BaseCommand):
 
     def _populate(self, models, options):
         parallel = options['parallel']
+        if options['schema']:
+            routing = options['schema'][0]
+        else:
+            raise CommandError(
+                "No schema name"
+            )
         for doc in registry.get_documents(models):
             self.stdout.write("Indexing {} '{}' objects {}".format(
                 doc().get_queryset().count() if options['count'] else "all",
@@ -121,7 +135,7 @@ class Command(BaseCommand):
                 "(parallel)" if parallel else "")
             )
             qs = doc().get_indexing_queryset()
-            doc().update(qs, parallel=parallel, refresh=options['refresh'])
+            doc().update(qs, parallel=parallel, refresh=options['refresh'], routing=routing)
 
     def _delete(self, models, options):
         index_names = [index._name for index in registry.get_indices(models)]
@@ -152,6 +166,9 @@ class Command(BaseCommand):
                 "No action specified. Must be one of"
                 " '--create','--populate', '--delete' or '--rebuild' ."
             )
+        schema_name = options['schema'][0] if options['schema'] else None
+        if schema_name:
+            connection.set_schema(schema_name)
 
         action = options['action']
         models = self._get_models(options['models'])

@@ -5,6 +5,7 @@ from itertools import chain
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ImproperlyConfigured
+from django.db import connection
 from elasticsearch_dsl import AttrDict
 from six import itervalues, iterkeys, iteritems
 
@@ -138,7 +139,7 @@ class DocumentRegistry(object):
         if instance.__class__ in self._models:
             for doc in self._models[instance.__class__]:
                 if not doc.django.ignore_signals:
-                    doc().update(instance, **kwargs)
+                    doc().update(instance, routing=connection.schema_name, **kwargs)
 
     def delete(self, instance, **kwargs):
         """

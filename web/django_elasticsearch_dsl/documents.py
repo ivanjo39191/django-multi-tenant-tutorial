@@ -9,6 +9,9 @@ from elasticsearch.helpers import bulk, parallel_bulk
 from elasticsearch_dsl import Document as DSLDocument
 from six import iteritems
 
+from django.db import connection
+from django_tenants.utils import schema_context, get_tenant_model
+
 from .exceptions import ModelFieldNotMappedError
 from .fields import (
     BooleanField,
@@ -178,20 +181,24 @@ class DocType(DSLDocument):
         """
         return object_instance.pk
 
-    def _prepare_action(self, object_instance, action):
-        return {
+    def _prepare_action(self, object_instance, action, routing):
+        index_id = self.generate_id(object_instance)
+        doc = {
             '_op_type': action,
             '_index': self._index._name,
-            '_id': self.generate_id(object_instance),
+            '_id': f'{routing}-{index_id}',
             '_source': (
                 self.prepare(object_instance) if action != 'delete' else None
             ),
         }
+        if routing is not None:
+            doc["routing"] = routing
+        return doc
 
-    def _get_actions(self, object_list, action):
+    def _get_actions(self, object_list, action, routing):
         for object_instance in object_list:
             if action == 'delete' or self.should_index_object(object_instance):
-                yield self._prepare_action(object_instance, action)
+                yield self._prepare_action(object_instance, action, routing)
 
     def _bulk(self, *args, **kwargs):
         """Helper for switching between normal and parallel bulk operation"""
@@ -208,7 +215,7 @@ class DocType(DSLDocument):
         """
         return True
 
-    def update(self, thing, refresh=None, action='index', parallel=False, **kwargs):
+    def update(self, thing, refresh=None, action='index', parallel=False, routing=None, **kwargs):
         """
         Update each document in ES for a model, iterable of models or queryset
         """
@@ -223,7 +230,7 @@ class DocType(DSLDocument):
             object_list = thing
 
         return self._bulk(
-            self._get_actions(object_list, action),
+            self._get_actions(object_list, action, routing),
             parallel=parallel,
             **kwargs
         )
