@@ -1,0 +1,60 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  {% if title %} &rsaquo; {% if back %} <a href="{{ back }}">{{ title }}</a> {% else %} {{ title }} {% endif %}{% endif %}
+  {% if subtitle %} &rsaquo; {{ subtitle|safe }}{% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+<style>
+
+</style>
+
+<div class="card">
+  <div class="card-block">
+    <div>
+      <fieldset class="form module">
+        <form id="form" name="form" method="post">
+          {% csrf_token %}
+          {{form.media}}
+          <div class="col-xs-12 col-sm-9 col-md-10 col-multi-fields">
+            <table border="0" width="100%">
+              {% for field in form %}
+                <tr>
+                  <td colspan=2>
+                    <div class="form-group row form-row">
+                      <label class="form-control-label col-xs-12 col-sm-3 col-md-2 {% if field.field.required %} field-required{% endif %}"
+                        id="{{ field.auto_id }}_filter" name="{{ field.name }}">{{field.label}}</label>
+                      <div class="col-xs-9">{{field}}</div>
+                      {% for error in field.errors %} 
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+              <tr>
+                <td colspan=2>&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan=2>
+                  <center>
+                    <button class="btn btn-primary" type="submit" value="新增" name="add">新增</button>
+                  </center>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
