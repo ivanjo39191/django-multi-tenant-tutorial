@@ -46,7 +46,7 @@
 [Day 26 Django 來找查，實作搜尋功能](https://ithelp.ithome.com.tw/articles/10306174)
 [Day 27 合法克隆，複製你的 Django 租戶](https://ithelp.ithome.com.tw/articles/10306470)  
 
-Github 若當日有更新程式會新增一個當天的 branch，連結如下：
+Github 若當日有更新程式會新增一個當天的 branch，連結如下：   
 https://github.com/ivanjo39191/django-multi-tenant-tutorial/
 
 ### 明日預告
