@@ -89,7 +89,10 @@
                                 class="tf-ion-ios-search-strong"></i> Search</a>
                         <ul class="dropdown-menu search-dropdown">
                             <li>
-                                <form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
+                                <form method="GET" action="{% url 'products:list' %}" 
+                                    onsubmit="this.action = this.action + this.search.value;alert(this.action); this.submit();">
+                                    <input type="search" name="q" class="form-control" placeholder="Search..."/>
+                                </form>
                             </li>
                         </ul>
                     </li><!-- / Search -->

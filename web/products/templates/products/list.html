@@ -7,7 +7,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="content">
-                    <h1 class="page-name">全部商品</h1>
+                    <h1 class="page-name">
+                        {% if query_string %}
+                          {{query_string}} 的搜尋結果為 {{ count }} 筆
+                        {% else %}
+                            全部商品
+                        {% endif%}
+                    </h1>
                     <ol class="breadcrumb">
                         <li><a href="{% url 'products:home' %}">首頁</a></li>
                         <li class="active"><a href="{% url 'products:list' %}">商品列表</a></li>
@@ -25,8 +31,8 @@
             <div class="col-md-4">
                 <div class="product-item">
                     <div class="product-thumb">
-                        {% if item.product_image_set.all.0.image %}
-                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                        {% if item.product_image_set.0.image %}
+                        <img class="img-responsive" src="{{ item.product_image_set.0.image }}" alt="product-img" />
                         {% endif %}
                         <div class="preview-meta">
                             <ul>
@@ -61,8 +67,8 @@
                             <div class="row">
                                 <div class="col-md-8 col-sm-6 col-xs-12">
                                     <div class="modal-image">
-                                        {% if item.product_image_set.all.0.image %}
-                                        <img class="img-responsive" src="{{ item.product_image_set.all.0.image.url }}" alt="product-img" />
+                                        {% if item.product_image_set.0.image %}
+                                        <img class="img-responsive" src="{{ item.product_image_set.0.image }}" alt="product-img" />
                                         {% endif %}
                                     </div>
                                 </div>

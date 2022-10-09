@@ -2,6 +2,7 @@ from django.db import connection
 from django.views.generic import TemplateView, ListView, DetailView
 from core.models import Setting
 from products.models import Product, ProductCategory
+from products.documents import ProductDocument
 
 class HomeView(TemplateView):
     template_name = "products/home.html"
@@ -25,6 +26,26 @@ class ProductListView(ListView):
     context_object_name = 'items'
     paginate_by = 10
 
+    def get(self, request, *args, **kwargs):
+        
+        self.query_string = request.GET.get('q', '')
+        self.object_list = self.get_queryset()
+            
+        context = self.get_context_data()
+        if self.query_string:
+            count = self.object_list.count()
+            context['query_string'] = self.query_string
+            context['count'] = count
+        else:
+            context['query_string'] = ''
+            context['count'] = 0
+        return self.render_to_response(context)
+
+    def get_queryset(self):
+        results = ProductDocument.search().query("term", **{"_routing": connection.schema_name})
+        if self.query_string:
+            results = results.query("match", name=self.query_string)
+        return results
 
 class ProductDetailView(DetailView):
     
