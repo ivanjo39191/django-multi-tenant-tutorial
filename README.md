@@ -43,7 +43,7 @@
 [Day 23 使命必達！Django 多租戶下的任務排程](https://ithelp.ithome.com.tw/articles/10304728)  
 [Day 24 裝上引擎，Django 的移動城堡](https://ithelp.ithome.com.tw/articles/10304743)  
 [Day 25 改造引擎，Django 多租戶下的搜尋引擎](https://ithelp.ithome.com.tw/articles/10305671)  
-[Day 26 Django 來找查，實作搜尋功能](https://ithelp.ithome.com.tw/articles/10306174)
+[Day 26 Django 來找查，實作搜尋功能](https://ithelp.ithome.com.tw/articles/10306174)  
 [Day 27 合法克隆，複製你的 Django 租戶](https://ithelp.ithome.com.tw/articles/10306470)  
 
 Github 若當日有更新程式會新增一個 branch，連結如下：   
