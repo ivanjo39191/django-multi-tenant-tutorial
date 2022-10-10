@@ -76,7 +76,7 @@
                                 class="tf-ion-android-cart"></i>Cart</a>
                         <div class="dropdown-menu cart-dropdown">
                             <ul class="text-center cart-buttons">
-                                <li><a href="cart.html" class="btn btn-small">View Cart</a></li>
+                                <li><a href="{% url 'orders:cart' %}" class="btn btn-small">View Cart</a></li>
                                 <li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
                             </ul>
                         </div>
@@ -189,8 +189,28 @@
 
     <!-- Main Js File -->
     <script src="{% static 'products/js/script.js' %}"></script>
-    
 
+    <!-- sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        function getAjax(url, msg, reload){
+            $.get(url, function(data, status){
+                Swal.fire({
+                    icon: 'success',
+                    title: msg,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    if (reload == 'true'){
+                        location.reload()
+                    }
+                })
+          });
+        }
+        
+        
+    </script>
 
 </body>
 </html>

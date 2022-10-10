@@ -81,7 +81,7 @@
                                         <a href="#" ><i class="tf-ion-ios-heart"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#!"><i class="tf-ion-android-cart"></i></a>
+                                        <a href="javascript:void(0)" onclick="getAjax('{% url 'orders:add_cart' item.id %}', '已加入購物車', 'false');"><i class="tf-ion-android-cart"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -115,7 +115,7 @@
                                             <p class="product-short-description">
                                                 {{ item.description }}
                                             </p>
-                                            <a href="cart.html" class="btn btn-main">加入購物車</a>
+                                            <a href="javascript:void(0)" onclick="getAjax('{% url 'orders:add_cart' item.id %}', '已加入購物車', 'false')" class="btn btn-main">加入購物車</a>
                                             <a href="{% url 'products:detail' item.id %}" class="btn btn-transparent">檢視商品詳細資料</a>
                                         </div>
                                     </div>

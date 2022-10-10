@@ -80,7 +80,7 @@
                             <li><a href="product-single.html">{{ item.category.name }}</a></li>
                         </ul>
                     </div>
-                    <a href="cart.html" class="btn btn-main mt-20">加入購物車</a>
+                    <a href="javascript:void(0)" onclick="getAjax('{% url 'orders:add_cart' item.id %}', '已加入購物車', 'false')" class="btn btn-main mt-20">加入購物車</a>
                 </div>
             </div>
         </div>

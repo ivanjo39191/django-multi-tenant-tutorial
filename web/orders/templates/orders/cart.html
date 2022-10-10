@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Main Menu Section -->
+<div class="page-wrapper">
+    <div class="cart shopping">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="block">
+              <div class="product-list">
+                <form method="post">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="">Item Name</th>
+                        <th class="">Item Price</th>
+                        <th class="">Quatity</th>
+                        <th class="">Total Price</th>
+                        <th class="">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for product_id, product in product_dict.items %}
+                      <tr class="">
+                        <td class="">
+                          <div class="product-info">
+                            {% if product.product.product_image_set.all %}
+                              {% if product.product.product_image_set.all.0.image %}
+                                <img width="80" src="{{ product.product.product_image_set.all.0.image.url }}" alt="" />
+                              {% endif %}
+                            {% endif %}
+                            <a href="#!">{{ product.product.name }}</a>
+                          </div>
+                        </td>
+                        <td class="">${{ product.product.price }}</td>
+                        <td class="">
+                          {{ product.count }}
+                        </td>
+                        <td class="">${% widthratio product.product.price 1 product.count %}</td>
+                        <td class="">
+                          <a href="javascript:void(0)" onclick="getAjax('{% url 'orders:delete_cart' product_id %}', '已移除商品', 'true');" class="product-remove" >Remove</a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock content %}
