@@ -22,7 +22,8 @@ def task_epaper_send_mail(schema):
     language =  get_language()
     setting =  Setting.objects.get(id=language)
     context = {
-        'host': f'http://{domain}:8000',
+        # 'host': f'http://{domain}:8000',
+        'host': f'https://{domain}',
         'sitename': setting.sitename,
         'products': new_products
     }

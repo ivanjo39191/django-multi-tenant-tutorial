@@ -4,5 +4,7 @@ db.sqlite3
 .history
 django_tenants
 web/media/*
-django_elasticsearch_dsl_*
+static
+nginx/logs
+nginx/certificates
 # .env (正式環境不上傳)

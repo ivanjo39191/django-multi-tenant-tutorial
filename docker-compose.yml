@@ -73,3 +73,16 @@ services:
       - ./data/elasticsearch_data:/usr/share/elasticsearch/data # chmod 777
     ports:
         - "9200:9200"
+  nginx:
+      image: nginx
+      container_name: ${IMAGE_NAME}_nginx
+      restart: always
+      volumes:
+          - .:/opt/app
+          - ./nginx/conf.d:/etc/nginx/conf.d
+          - ./nginx/certificates:/etc/nginx/certificates
+      ports:
+          - "80:80"
+          - "443:443"
+      depends_on:
+          - web
