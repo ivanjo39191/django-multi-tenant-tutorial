@@ -45,6 +45,9 @@
 [Day 25 改造引擎，Django 多租戶下的搜尋引擎](https://ithelp.ithome.com.tw/articles/10305671)  
 [Day 26 Django 來找查，實作搜尋功能](https://ithelp.ithome.com.tw/articles/10306174)  
 [Day 27 合法克隆，複製你的 Django 租戶](https://ithelp.ithome.com.tw/articles/10306470)  
+[Day 28 全都要買，Django 實作購物車功能](https://ithelp.ithome.com.tw/articles/10306977)  
+[Day 29 大花錢，Django 訂單串接金流](https://ithelp.ithome.com.tw/articles/10307627)  
+[Day 30 改造完成，雲端部署 Django 多租戶架構電商網站](https://ithelp.ithome.com.tw/articles/10308021)  
 
 Github 若當日有更新程式會新增一個 branch，連結如下：   
 https://github.com/ivanjo39191/django-multi-tenant-tutorial/
