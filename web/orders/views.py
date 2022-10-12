@@ -141,6 +141,8 @@ class ECPayView(TemplateView):
     template_name = "orders/ecpay.html"
 
     def post(self, request, *args, **kwargs):
+        scheme = request.is_secure() and "https" or "http"
+        domain = request.META['HTTP_HOST']
 
         order_id = request.POST.get("order_id")
         order = Order.objects.get(order_id=order_id)
@@ -153,13 +155,13 @@ class ECPayView(TemplateView):
             'TotalAmount': order.total,
             'TradeDesc': order.order_id,
             'ItemName': product_list,
-            'ReturnURL': 'https://dfb1-123-195-204-33.jp.ngrok.io/orders/return/', # ReturnURL為付款結果通知回傳網址，為特店server或主機的URL，用來接收綠界後端回傳的付款結果通知。
+            'ReturnURL': f'{scheme}://{domain}/orders/return/', # ReturnURL為付款結果通知回傳網址，為特店server或主機的URL，用來接收綠界後端回傳的付款結果通知。
             'ChoosePayment': 'ALL',
-            'ClientBackURL': 'https://dfb1-123-195-204-33.jp.ngrok.io/products/list/', # 消費者點選此按鈕後，會將頁面導回到此設定的網址(返回商店按鈕)
-            'ItemURL': 'https://dfb1-123-195-204-33.jp.ngrok.io/products/list/', # 商品銷售網址
+            'ClientBackURL': f'{scheme}://{domain}/products/list/', # 消費者點選此按鈕後，會將頁面導回到此設定的網址(返回商店按鈕)
+            'ItemURL': f'{scheme}://{domain}/products/list/', # 商品銷售網址
             'Remark': '交易備註',
             'ChooseSubPayment': '',
-            'OrderResultURL': 'https://dfb1-123-195-204-33.jp.ngrok.io/orders/orderresult/', # 消費者付款完成後，綠界會將付款結果參數以POST方式回傳到到該網址
+            'OrderResultURL': f'{scheme}://{domain}/orders/orderresult/', # 消費者付款完成後，綠界會將付款結果參數以POST方式回傳到到該網址
             'NeedExtraPaidInfo': 'Y',
             'DeviceSource': '',
             'IgnorePayment': '',
