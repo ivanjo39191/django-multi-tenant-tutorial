@@ -79,3 +79,19 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class RelationalProduct(models.Model):
+    product = models.ForeignKey('products.Product', on_delete=models.CASCADE, verbose_name='商品名稱')
+    order = models.ForeignKey('orders.Order', on_delete=models.CASCADE)
+    number = models.IntegerField('數量', default=1)
+
+    @property
+    def name(self):
+        return self.product.name
+
+    @property
+    def price(self):
+        return self.product.price
+
+    def __str__(self):
+        return ""

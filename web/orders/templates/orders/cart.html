@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
-<!-- Main Menu Section -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+         <div class="col-md-6">
+             <ol class="breadcrumb">
+                 <li><a href="{% url 'products:home' %}">{% translate "Home page" %}</a></li>
+                 <li class="active">{% translate "Shopping cart" %}</li>
+             </ol>
+         </div>
+     </div>
+	</div>
+</section>
 <div class="page-wrapper">
     <div class="cart shopping">
       <div class="container">
@@ -46,7 +58,7 @@
                       {% endfor %}
                     </tbody>
                   </table>
-                  <a href="checkout.html" class="btn btn-main pull-right">Checkout</a>
+                  <a href="{% url 'orders:checkout' %}" class="btn btn-main pull-right">Checkout</a>
                 </form>
               </div>
             </div>
